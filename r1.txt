@@ -1,5 +1,5 @@
 <configuration-text>
-## Last changed: 2023-05-23 12:42:36 PDT
+## Last changed: 2023-05-25 01:35:32 PDT
 version 21.2R3.8;
 groups {
     member0 {
@@ -145,8 +145,9 @@ groups {
         }
     }
 }
-apply-groups [ global member0 ];
+apply-groups global;
 system {
+    host-name r1;
     ports {
         console log-out-on-disconnect;
     }
@@ -177,6 +178,13 @@ interfaces {
             }
             family iso;
             family mpls;
+        }
+    }
+    fxp0 {
+        unit 0 {
+            family inet {
+                address 10.49.123.97/19;
+            }
         }
     }
     lo0 {
@@ -227,9 +235,6 @@ protocols {
         }
     }
     mpls {
-        traffic-engineering {
-            bgp-igp;
-        }
         no-cspf;
         label-switched-path r4viar3 {
             to 4.4.4.4;

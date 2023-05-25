@@ -72,11 +72,12 @@ set groups global routing-options static route 66.129.0.0/16 next-hop 10.49.127.
 set groups global routing-options static route 66.129.0.0/16 retain
 set groups global routing-options static route 66.129.0.0/16 no-readvertise
 set apply-groups global
-set apply-groups member0
+set system host-name r5
 set system ports console log-out-on-disconnect
 set interfaces ge-0/0/0 unit 0 family inet address 192.168.45.1/31
 set interfaces ge-0/0/0 unit 0 family iso
 set interfaces ge-0/0/0 unit 0 family mpls
+set interfaces fxp0 unit 0 family inet address 10.49.103.15/19
 set interfaces lo0 unit 0 family inet address 5.5.5.5/32
 set interfaces lo0 unit 0 family iso address 49.0001.0001.0001.0005.00
 set policy-options policy-statement lb then load-balance per-packet

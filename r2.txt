@@ -1,5 +1,5 @@
 <configuration-text>
-## Last changed: 2023-05-23 12:43:17 PDT
+## Last changed: 2023-05-25 01:40:19 PDT
 version 21.2R3.8;
 groups {
     member0 {
@@ -145,8 +145,9 @@ groups {
         }
     }
 }
-apply-groups [ global member0 ];
+apply-groups global;
 system {
+    host-name r2;
     ports {
         console log-out-on-disconnect;
     }
@@ -168,6 +169,13 @@ interfaces {
             }
             family iso;
             family mpls;
+        }
+    }
+    fxp0 {
+        unit 0 {
+            family inet {
+                address 10.49.109.78/19;
+            }
         }
     }
     lo0 {
@@ -212,14 +220,8 @@ protocols {
                 shortcuts;
             }
         }
-        label-switched-path r4viar3 {
-            level 2 metric 1;
-        }
     }
     mpls {
-        traffic-engineering {
-            bgp-igp;
-        }
         no-cspf;
         label-switched-path r4viar3 {
             to 4.4.4.4;
@@ -227,7 +229,8 @@ protocols {
             primary r3strict;
         }
         path r3strict {
-            3.3.3.3 loose;
+            1.1.1.1 strict;
+            3.3.3.3 strict;
         }
         interface ge-0/0/0.0;
         interface ge-0/0/1.0;
